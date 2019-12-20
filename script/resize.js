@@ -21,7 +21,11 @@ function resize (file, size) {
     .resize(size, size, { fit: 'inside' })
     .toFormat('png')
     .toBuffer()
-    .then(buf => imagemin.buffer(buf, { use: [ imageminPngquant() ] }))
+    .then(buf => console.log('BUF: ', buf))
+    .then(buf => imagemin.buffer(buf, { use: [ imageminPngquant() ] })).catch(err => {
+      console.log('HERE THE CATCH')
+      console.log(err)
+    })
     .then(buf => fs.writeFileSync(newFile, buf))
 }
 
